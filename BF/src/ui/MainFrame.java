@@ -1,13 +1,16 @@
 package ui;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Font;
+
 import java.awt.Insets;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -27,6 +30,8 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		// 创建窗体
 		JFrame frame = new JFrame("BF Client");
+		ImageIcon bl=new ImageIcon("image/BrainLight.png");
+		frame.setIconImage(bl.getImage());
 		frame.setSize(800, 600);
 		frame.setLocation(200, 200);
 		frame.setLayout(null);
