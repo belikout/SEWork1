@@ -27,7 +27,7 @@ public class LoginFrame extends JFrame {
 		ct = this.getContentPane();
 		ct.add(loginPanel);
 		this.setTitle("Login");
-		this.setLocation(1000, 200);
+		this.setLocation(950, 100);
 		this.setSize(200, 600);
 		this.setLayout(null);
 		this.setResizable(false);

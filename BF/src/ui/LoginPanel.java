@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import rmi.RemoteHelper;
 
 public class LoginPanel extends JPanel {	
 	/**
@@ -57,7 +60,20 @@ public class LoginPanel extends JPanel {
 		loginButton.setOpaque(true);
 		loginButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
+				String id=IdField.getText();
+				String key=new String(KeyField.getPassword());
+				IdField.setText("");
+				KeyField.setText("");
+				boolean k=false;
+				try{
+				k=RemoteHelper.getInstance().getIOService().readIDFile(id,key);
+				}catch(RemoteException e1){
+					e1.printStackTrace();
+				}
+				if(k)
+				DialogCreator.successDialog("Success");
+				else
+				DialogCreator.failDialog("Fail");
 			}
 	});
 		this.add(loginButton);
@@ -67,7 +83,26 @@ public class LoginPanel extends JPanel {
 		RegistButton.setOpaque(true);
 		RegistButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
+				String id=IdField.getText();
+				String key=new String(KeyField.getPassword());
+				String s=id+";"+key;
+				IdField.setText("");
+				KeyField.setText("");
+				boolean k=false;
+				try{
+				k=RemoteHelper.getInstance().getIOService().readIDFile0(id);
+				}catch(RemoteException e1){
+					e1.printStackTrace();
+				}
+				if(k)
+				DialogCreator.failDialog0("Fail");
+				else{
+					try {
+						RemoteHelper.getInstance().getIOService().writeIDFile(s);
+						DialogCreator.successDialog0("Success");
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}}
 			}
 	});
 		this.add(RegistButton);

@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
 		ImageIcon bl=new ImageIcon("image/BrainLight.png");
 		frame.setIconImage(bl.getImage());
 		frame.setSize(800, 600);
-		frame.setLocation(200, 200);
+		frame.setLocation(150, 100);
 		frame.setLayout(null);
 		Font fm=new Font("Comic Sans MS",Font.PLAIN,18);
 		
@@ -136,9 +136,9 @@ public class MainFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String cmd = e.getActionCommand();
 			if (cmd.equals("Open")) {
-				//textArea.setText("Open");
+				
 			} else if (cmd.equals("Save")) {
-				//textArea.setText("Save");
+				
 			} else if (cmd.equals("Execute")) {
 				String code = textPanel.text.getText();
 				String param=dataPanel.text.getText()+"\n";
@@ -210,6 +210,7 @@ public class MainFrame extends JFrame {
 			}else{
 				sgn--;
 			}
+			default:break;
 	}
 	}
 	
