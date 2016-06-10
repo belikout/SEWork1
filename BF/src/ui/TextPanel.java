@@ -22,7 +22,7 @@ public class TextPanel extends JPanel {
 			this.setOpaque(false);
 		    this.setLayout(new BorderLayout());
 		    text = new JTextArea();
-		    Font fm=new Font("Comic Sans MS",Font.PLAIN,20);
+		    Font fm=new Font("Comic Sans MS",Font.PLAIN,24);
 		    text.setOpaque(false);
 		    text.setForeground(Color.WHITE);
 		    text.setFont(fm);

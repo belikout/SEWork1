@@ -1,7 +1,7 @@
 package ui;
 
+
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 
@@ -9,32 +9,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-
-
-public class ResultPanel extends JPanel {
+public class AfterPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public JLabel text = null;
-	public static JPanel jCards=new JPanel();
-	public static CardLayout cl=new CardLayout();
-	public AfterPanel afterPanel;
 	private ImageIcon imageIcon = null;
-	public ResultPanel(){
-			afterPanel=new AfterPanel();
-			imageIcon = new ImageIcon("image/resultbg.png");
+	public AfterPanel(){
+			imageIcon = new ImageIcon("image/resultbg0.png");
 			this.setOpaque(false);
 		    this.setLayout(new BorderLayout());
-		    jCards.setLayout(cl);
-			jCards.add(new BeforePanel(), "beforePanel");
-			jCards.add(afterPanel, "afterPanel");
-		    cl.show(jCards, "beforePanel");
 		    text = new JLabel();
 		    Font fm=new Font("Comic Sans MS",Font.PLAIN,24);
 		    text.setOpaque(false);
 		    text.setFont(fm);
 		    text.setBounds(0, 0, WIDTH, HEIGHT);
 		    this.add(text);
-		    this.add(jCards);
 		    this.setSize(400, 250);
 		    this.setVisible(true);
 	}

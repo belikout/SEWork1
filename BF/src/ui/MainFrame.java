@@ -1,10 +1,10 @@
 package ui;
 
 
-import java.awt.Color;
+
 import java.awt.Font;
 
-import java.awt.Insets;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,12 +12,11 @@ import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JTextArea;
-import javax.swing.border.LineBorder;
+
 
 import rmi.RemoteHelper;
 
@@ -43,7 +42,7 @@ public class MainFrame extends JFrame {
 		frame.setLocation(200, 200);
 		frame.setLayout(null);
 		Font fm=new Font("Comic Sans MS",Font.PLAIN,18);
-		Font f=new Font("Comic Sans MS",Font.PLAIN,20);
+		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorder(null);
 		JMenu fileMenu = new JMenu("File");
@@ -144,8 +143,9 @@ public class MainFrame extends JFrame {
 				String code = textPanel.text.getText();
 				String param=dataPanel.text.getText()+"\n";
 				String result=execute(code,param);
-					System.out.println(result);
-				resultPanel.text.setText("Hello, result: "+result);
+				System.out.println(result);
+				resultPanel.cl.show(ResultPanel.jCards, "afterPanel");
+				resultPanel.afterPanel.text.setText("Hello, result: "+result);
 			} else if(cmd.equals("Exit")){
 				System.exit(0);
 			}

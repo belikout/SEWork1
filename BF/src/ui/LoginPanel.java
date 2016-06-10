@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginPanel extends JPanel {	
@@ -30,8 +31,8 @@ public class LoginPanel extends JPanel {
 		Font f=new Font("Comic Sans MS",Font.PLAIN,20);
 		
 		Font fm=new Font("Comic Sans MS",Font.PLAIN,10);
-		JTextField IdField = new JTextField("Please Input Your ID");
-		JTextField KeyField = new JTextField("Please Input Your Password");
+		JTextField IdField = new JTextField();
+		JPasswordField KeyField = new JPasswordField();
 		IdField.setFont(fm);
 		KeyField.setFont(fm);
 		IdField.setBounds(30, 300, 140, 30);

@@ -2,15 +2,11 @@ package ui;
 
 
 import java.awt.Container;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+
 
 public class LoginFrame extends JFrame {
 
@@ -35,7 +31,7 @@ public class LoginFrame extends JFrame {
 		this.setSize(200, 600);
 		this.setLayout(null);
 		this.setResizable(false);
-		this.setVisible(true);
+		this.setVisible(false);
 	}
 	/*public static void main(String args[]){
 		LoginFrame loginFrame=new LoginFrame();
