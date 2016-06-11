@@ -8,6 +8,7 @@ import java.awt.Font;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
@@ -16,7 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 import rmi.RemoteHelper;
 
@@ -33,9 +35,10 @@ public class MainFrame extends JFrame {
 	private ResultPanel resultPanel;
 	private LoginFrame loginFrame;
 	private TextPanel textPanel;
-	private String userId;
-	private String fileName;
+	private String userId="";
+	private String fileName="";
 	private boolean isLogin;
+	
 	public MainFrame() {
 		// 创建窗体
 		JFrame frame = new JFrame("BF Client");
@@ -54,33 +57,43 @@ public class MainFrame extends JFrame {
 		JMenuItem newMenuItem = new JMenuItem("New");
 		newMenuItem.setFont(fm);
 		fileMenu.add(newMenuItem);
+		newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
 		JMenuItem openMenuItem = new JMenuItem("Open");
 		openMenuItem.setFont(fm);
 		fileMenu.add(openMenuItem);
+		openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
 		JMenuItem saveMenuItem = new JMenuItem("Save");
 		saveMenuItem.setFont(fm);
 		fileMenu.add(saveMenuItem);
+		saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
 		JMenuItem exitMenuItem = new JMenuItem("Exit");
 		exitMenuItem.setFont(fm);
 		fileMenu.add(exitMenuItem);
+		exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,ActionEvent.CTRL_MASK));
 		JMenu runMenu = new JMenu("Run");
 		runMenu.setFont(fm);
 		menuBar.add(runMenu);
 		JMenuItem executeMenuItem = new JMenuItem("Execute");
 		executeMenuItem.setFont(fm);
 		runMenu.add(executeMenuItem);
+		executeMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,ActionEvent.CTRL_MASK));
 		JMenu versionMenu = new JMenu("Version");
 		versionMenu.setFont(fm);
 		menuBar.add(versionMenu);
+		JMenuItem historyMenuItem = new JMenuItem("Open History Version");
+		historyMenuItem.setFont(fm);
+		versionMenu.add(historyMenuItem);
 		JMenu logMenu = new JMenu("Log");
 		logMenu.setFont(fm);
 		menuBar.add(logMenu);
 		JMenuItem loginMenuItem = new JMenuItem("Login");
 		loginMenuItem.setFont(fm);
 		logMenu.add(loginMenuItem);
+		loginMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,ActionEvent.CTRL_MASK));
 		JMenuItem logoutMenuItem = new JMenuItem("Logout");
 		logoutMenuItem.setFont(fm);
 		logMenu.add(logoutMenuItem);
+		logoutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,ActionEvent.CTRL_MASK));
 		frame.setJMenuBar(menuBar);
 		
 		newMenuItem.addActionListener(new NewActionListener());
@@ -89,26 +102,13 @@ public class MainFrame extends JFrame {
 		exitMenuItem.addActionListener(new MenuItemActionListener());
 		executeMenuItem.addActionListener(new MenuItemActionListener());
 		loginMenuItem.addActionListener(new LoginActionListener());
-		logoutMenuItem.addActionListener(new MenuItemActionListener());
-		/*textArea = new JTextArea("Input Code Area");
-		textArea.setMargin(new Insets(20, 20, 20, 20));
-		textArea.setBackground(Color.LIGHT_GRAY);
-		textArea.setBounds(0, 0, 800, 300);
-		textArea.setBorder(new LineBorder(new java.awt.Color(127,157,185), 5, false));
-		textArea.setLineWrap(true);
-        textArea.setFont(f);
-		frame.add(textArea);*/
+		logoutMenuItem.addActionListener(new LogoutActionListener());
+		historyMenuItem.addActionListener(new historyActionListener());
+		
 		textPanel=new TextPanel();
 		textPanel.setLocation(0, 0);
 		frame.add(textPanel);
-		/*dataArea = new JTextArea("Input Data Area");
-		dataArea.setMargin(new Insets(20, 20, 20, 20));
-		dataArea.setBackground(Color.PINK);
-		dataArea.setBounds(0, 300, 400, 250);
-		dataArea.setBorder(new LineBorder(new java.awt.Color(127,157,185), 5, false));
-		dataArea.setLineWrap(true);
-		dataArea.setFont(f);
-		frame.add(dataArea);*/
+		
 		dataPanel=new DataPanel();
 		dataPanel.setLocation(0, 300);
 		frame.add(dataPanel);
@@ -116,13 +116,7 @@ public class MainFrame extends JFrame {
 		resultPanel=new ResultPanel();
 		resultPanel.setLocation(400,300);
 		frame.add(resultPanel);
-		/*resultLabel = new JLabel("Console");
-		resultLabel.setBackground(Color.PINK);
-		resultLabel.setBounds(400, 300, 400, 250);
-		resultLabel.setBorder(new LineBorder(new java.awt.Color(127,157,185), 5, false));
-		resultLabel.setFont(f);
-		frame.add(resultLabel);*/
-
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);
@@ -139,13 +133,32 @@ public class MainFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String cmd = e.getActionCommand();
 			if (cmd.equals("Open")) {
-				
-			} else if (cmd.equals("Save")) {
-				
-			} else if (cmd.equals("Execute")) {
+				isLogin=loginFrame.loginPanel.isLogin;
+				if(isLogin){
+				try {
+					String []a=RemoteHelper.getInstance().getIOService().readFileList(loginFrame.loginPanel.userId);
+					String s = (String) JOptionPane.showInputDialog(null,"Choose Your File:\n", "File", JOptionPane.PLAIN_MESSAGE, new ImageIcon("image/bg0.png"), a, " ");
+					fileName=s;
+					String t=RemoteHelper.getInstance().getIOService().readFile(loginFrame.loginPanel.userId,s);
+					t=t.replace('@', '\n');
+					textPanel.text.setText(t);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}}
+				else
+					DialogCreator.failDialog1("Login First");
+			} 
+			else if (cmd.equals("Execute")) {
 				String code = textPanel.text.getText();
 				String param=dataPanel.text.getText()+"\n";
-				String result=execute(code,param);
+				String result="";
+				try {
+					result = RemoteHelper.getInstance().getExecuteService().execute(code,param);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				System.out.println(result);
 				resultPanel.cl.show(ResultPanel.jCards, "afterPanel");
 				resultPanel.afterPanel.text.setText("Hello, result: \r\n"+result);
@@ -159,13 +172,39 @@ public class MainFrame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			userId=loginFrame.loginPanel.userId;
+			isLogin=loginFrame.loginPanel.isLogin;
+			if(isLogin){
+				if(fileName!=""){
 			String code = textPanel.text.getText();
+			code=code.replace('\n', '@');
 			try {
 				userId=loginFrame.loginPanel.userId;
 				RemoteHelper.getInstance().getIOService().writeFile(code, userId, fileName);
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
+				}
+				else{
+					try {
+						fileName=DialogCreator.InputDialog("New File");
+						RemoteHelper.getInstance().getIOService().writelistFile(userId,fileName);
+						RemoteHelper.getInstance().getIOService().createFile(userId,fileName);
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
+					String code = textPanel.text.getText();
+					try {
+						userId=loginFrame.loginPanel.userId;
+						RemoteHelper.getInstance().getIOService().writeFile(code, userId, fileName);
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+			else
+				DialogCreator.failDialog1("Login First");
+				
 		}
 
 	}
@@ -173,17 +212,23 @@ public class MainFrame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			userId=loginFrame.loginPanel.userId;
+			isLogin=loginFrame.loginPanel.isLogin;
+			if(isLogin){
 			textPanel.text.setText("");
+			dataPanel.text.setText("");
 			resultPanel.cl.show(ResultPanel.jCards, "beforePanel");
 			try {
-				userId=loginFrame.loginPanel.userId;
 				fileName=DialogCreator.InputDialog("New File");
+				RemoteHelper.getInstance().getIOService().writelistFile(userId,fileName);
 				RemoteHelper.getInstance().getIOService().createFile(userId,fileName);
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
 		}
-
+			else
+				DialogCreator.failDialog1("Login First");
+		}
 	}
 	class LoginActionListener implements ActionListener {
 
@@ -193,48 +238,44 @@ public class MainFrame extends JFrame {
 		}
 
 	}
-	public static String execute(String code, String param) {
-		char[] pr=new char[5000];
-		int i=0;
-		int d=0;
-		int sgn=0;
-		String res=null;
-		int[] s=new int[500];
-		
-		for(int j=0;j<code.length();j++){
-			switch(code.charAt(j)){
-			case' ':
-				break;
-			case'>':i++;
-			break;
-			case'<':i--;
-			break;
-			case',':{pr[i]=param.charAt(d);d++;}
-			break;
-			case'.':res+=(pr[i]);
-			break;
-			case'+':pr[i]++;
-			break;
-			case'-':pr[i]--;
-			break;
-			case'[':{
-				sgn+=1;
-				s[sgn]=j;
-				if(pr[i]<=0){
-					j++;
+	class historyActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			userId=loginFrame.loginPanel.userId;
+			isLogin=loginFrame.loginPanel.isLogin;
+			if(isLogin&&fileName!=""){
+			try {
+				int vs=RemoteHelper.getInstance().getIOService().readFileVersionNum(userId,fileName);
+				String []a=new String[vs];
+				for(int i=0;i<vs;i++){
+					a[i]="Version"+Integer.toString(i);
 				}
+				String s = (String) JOptionPane.showInputDialog(null,"Choose Your File:\n", "File", JOptionPane.PLAIN_MESSAGE, new ImageIcon("image/bg0.png"), a, " ");
+				int v=Integer.parseInt(s.substring(7));
+				String t=RemoteHelper.getInstance().getIOService().readFileVersion(userId,fileName,v);
+				textPanel.text.setText(t);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			break;
-			case']':if(pr[i]>0){
-				j=s[sgn];
-			}else{
-				sgn--;
 			}
-			default:break;
+		}
+
 	}
+	class LogoutActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			textPanel.text.setText("");
+			dataPanel.text.setText("");
+			resultPanel.cl.show(ResultPanel.jCards, "beforePanel");
+			userId="";
+			loginFrame.loginPanel.userId="";
+			loginFrame.loginPanel.isLogin=false;
+			fileName="";
+		}
+
 	}
 	
-	
-		return res.substring(4, res.length());
-	}
 }

@@ -1,5 +1,6 @@
 package ui;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,8 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 
 
 
@@ -28,12 +31,6 @@ public class DialogCreator {
 		dialogPane.setLayout(null);
 		JLabel imageLabel = new JLabel(dialogBgIcon);
 		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
-		/*JLabel wordLabel = new JLabel();
-		wordLabel.setText(message);
-		wordLabel.setForeground(Color.WHITE);
-		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		wordLabel.setFont(new Font(Font.DIALOG,Font.BOLD,30));
-		wordLabel.setBounds(10,40,400,100);*/
 		
 		okButton = new JButton();
 		okButton.setIcon(okIcon);
@@ -48,16 +45,14 @@ public class DialogCreator {
 			}
 			
 		});
-		//dialogPane.add(wordLabel);
+		
 		dialogPane.add(okButton);
 		dialogPane.add(imageLabel);
-		//wordLabel-top;okButton-middle;imageLabel-bottom
 		dialogPane.setOpaque(false);
 		
 		dialogPane.setPreferredSize(new Dimension(400,250));
 		dialog = dialogPane.createDialog(okButton,name);
 	    dialog.setVisible(true);
-	    //how to set a dialog as Opaque?
 		dialog.add(dialogPane);
 		dialog.getRootPane().setDefaultButton(okButton); 
 	}
@@ -69,13 +64,7 @@ public class DialogCreator {
 		dialogPane.setLayout(null);
 		JLabel imageLabel = new JLabel(dialogBgIcon);
 		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
-		/*JLabel wordLabel = new JLabel();
-		wordLabel.setText(message);
-		wordLabel.setForeground(Color.WHITE);
-		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		wordLabel.setFont(new Font(Font.DIALOG,Font.BOLD,30));
-		wordLabel.setBounds(10,40,400,100);*/
-		
+	
 		okButton = new JButton();
 		okButton.setIcon(okIcon);
 		okButton.setBounds(170,180,okIcon.getIconWidth(),okIcon.getIconHeight());
@@ -89,16 +78,15 @@ public class DialogCreator {
 			}
 			
 		});
-		//dialogPane.add(wordLabel);
+
 		dialogPane.add(okButton);
 		dialogPane.add(imageLabel);
-		//wordLabel-top;okButton-middle;imageLabel-bottom
+		
 		dialogPane.setOpaque(false);
 		
 		dialogPane.setPreferredSize(new Dimension(400,250));
 		dialog = dialogPane.createDialog(okButton,name);
 	    dialog.setVisible(true);
-	    //how to set a dialog as Opaque?
 		dialog.add(dialogPane);
 		dialog.getRootPane().setDefaultButton(okButton); 
 	}
@@ -110,13 +98,7 @@ public class DialogCreator {
 		dialogPane.setLayout(null);
 		JLabel imageLabel = new JLabel(dialogBgIcon);
 		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
-		/*JLabel wordLabel = new JLabel();
-		wordLabel.setText(message);
-		wordLabel.setForeground(Color.WHITE);
-		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		wordLabel.setFont(new Font(Font.DIALOG,Font.BOLD,30));
-		wordLabel.setBounds(10,40,400,100);*/
-		
+
 		okButton = new JButton();
 		okButton.setIcon(okIcon);
 		okButton.setBounds(170,180,okIcon.getIconWidth(),okIcon.getIconHeight());
@@ -130,16 +112,14 @@ public class DialogCreator {
 			}
 			
 		});
-		//dialogPane.add(wordLabel);
+	
 		dialogPane.add(okButton);
 		dialogPane.add(imageLabel);
-		//wordLabel-top;okButton-middle;imageLabel-bottom
 		dialogPane.setOpaque(false);
 		
 		dialogPane.setPreferredSize(new Dimension(400,250));
 		dialog = dialogPane.createDialog(okButton,name);
 	    dialog.setVisible(true);
-	    //how to set a dialog as Opaque?
 		dialog.add(dialogPane);
 		dialog.getRootPane().setDefaultButton(okButton); 
 	}
@@ -151,12 +131,6 @@ public class DialogCreator {
 		dialogPane.setLayout(null);
 		JLabel imageLabel = new JLabel(dialogBgIcon);
 		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
-		/*JLabel wordLabel = new JLabel();
-		wordLabel.setText(message);
-		wordLabel.setForeground(Color.WHITE);
-		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		wordLabel.setFont(new Font(Font.DIALOG,Font.BOLD,30));
-		wordLabel.setBounds(10,40,400,100);*/
 		
 		okButton = new JButton();
 		okButton.setIcon(okIcon);
@@ -171,33 +145,25 @@ public class DialogCreator {
 			}
 			
 		});
-		//dialogPane.add(wordLabel);
 		dialogPane.add(okButton);
 		dialogPane.add(imageLabel);
-		//wordLabel-top;okButton-middle;imageLabel-bottom
 		dialogPane.setOpaque(false);
 		
 		dialogPane.setPreferredSize(new Dimension(400,250));
 		dialog = dialogPane.createDialog(okButton,name);
 	    dialog.setVisible(true);
-	    //how to set a dialog as Opaque?
 		dialog.add(dialogPane);
 		dialog.getRootPane().setDefaultButton(okButton); 
 	}
 	public static void failDialog1(String name){
 		JButton okButton;
-		ImageIcon dialogBgIcon = new ImageIcon("image/dialogBg2.png");
+		ImageIcon dialogBgIcon = new ImageIcon("image/dialogBg4.png");
 		ImageIcon okIcon = new ImageIcon("image/ok0.png");
 		dialogPane = new JOptionPane();
 		dialogPane.setLayout(null);
 		JLabel imageLabel = new JLabel(dialogBgIcon);
 		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
-		/*JLabel wordLabel = new JLabel();
-		wordLabel.setText(message);
-		wordLabel.setForeground(Color.WHITE);
-		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		wordLabel.setFont(new Font(Font.DIALOG,Font.BOLD,30));
-		wordLabel.setBounds(10,40,400,100);*/
+		
 		
 		okButton = new JButton();
 		okButton.setIcon(okIcon);
@@ -212,16 +178,13 @@ public class DialogCreator {
 			}
 			
 		});
-		//dialogPane.add(wordLabel);
 		dialogPane.add(okButton);
 		dialogPane.add(imageLabel);
-		//wordLabel-top;okButton-middle;imageLabel-bottom
 		dialogPane.setOpaque(false);
 		
 		dialogPane.setPreferredSize(new Dimension(400,250));
 		dialog = dialogPane.createDialog(okButton,name);
 	    dialog.setVisible(true);
-	    //how to set a dialog as Opaque?
 		dialog.add(dialogPane);
 		dialog.getRootPane().setDefaultButton(okButton); 
 	}
@@ -255,6 +218,63 @@ public class DialogCreator {
 		
 		dialogPane.add(inputField);
 		
+		dialogPane.add(okButton);
+		dialogPane.add(imageLabel);
+		dialogPane.setOpaque(false);
+		
+		dialogPane.setPreferredSize(new Dimension(400,250));
+		dialog = dialogPane.createDialog(okButton,name);
+	    dialog.setVisible(true);
+		dialog.add(dialogPane);
+		dialog.getRootPane().setDefaultButton(okButton); 
+		
+		input = inputField.getText();
+		System.out.println(input);
+		return input;
+	}
+	public static  String InputDialog(String name,String message){
+		String input = null;
+		JButton okButton;
+		JTextField inputField;
+		ImageIcon dialogBgIcon = new ImageIcon("image/dialogBg5.png");
+		ImageIcon okIcon = new ImageIcon("image/ok.png");
+		dialogPane = new JOptionPane();
+		dialogPane.setLayout(null);
+		JLabel imageLabel = new JLabel(dialogBgIcon);
+		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
+		JTextArea text=new JTextArea();
+		text.setText(message);
+		text.setLineWrap(true);
+		text.setOpaque(false);
+		text.setForeground(Color.BLACK);
+		text.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+		text.setBounds(80,20,240,100);
+		/*JLabel wordLabel = new JLabel();
+		wordLabel.setText(message);
+		wordLabel.setForeground(Color.BLACK);
+		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		wordLabel.setFont(new Font(Font.DIALOG,Font.BOLD,15));
+		wordLabel.setBounds(10,40,400,100);
+		*/
+		okButton = new JButton();
+		okButton.setIcon(okIcon);
+		okButton.setBounds(160,160,okIcon.getIconWidth(),okIcon.getIconHeight());
+		okButton.setOpaque(true);
+		okButton.setContentAreaFilled(false);
+		okButton.setBorderPainted(false);
+		okButton.setFocusPainted(false);
+		okButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+			
+		});
+		inputField = new JTextField("Please Input the Name Of File");
+		inputField.setBounds(80, 120, 250, 40);
+		inputField.setFocusable(true);
+		
+		dialogPane.add(inputField);
+		dialogPane.add(text);
 		dialogPane.add(okButton);
 		dialogPane.add(imageLabel);
 		dialogPane.setOpaque(false);

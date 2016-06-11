@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+
 import service.IOService;
 
 public class IOServiceImpl implements IOService{
@@ -13,7 +15,7 @@ public class IOServiceImpl implements IOService{
 	@Override
 	public boolean writeFile(String file, String userId, String fileName) {
 		l.clear();
-		File f = new File(userId + "_" + fileName+"_"+"code");
+		File f = new File("code/"+userId + "_" + fileName+"_"+"code");
 		try{
 			
 			FileReader fileReader=new FileReader(f);
@@ -42,7 +44,38 @@ public class IOServiceImpl implements IOService{
 			return false;
 			}
 	}
-
+	@Override
+	public boolean writelistFile(String userId, String fileName) {
+		l.clear();
+		File f = new File(userId + "_" +"list");
+		try{
+			
+			FileReader fileReader=new FileReader(f);
+			BufferedReader reader=new BufferedReader(fileReader);
+			String str=null;
+			while ((str=reader.readLine())!=null){
+				if(str!=" "){
+				l.add(str);
+				}
+			}
+			reader.close();
+		}catch(Exception ex){
+		
+			ex.printStackTrace();
+		}
+		l.add(fileName);
+		 try{
+				FileWriter writer=new FileWriter(f);
+				for(int i=0;i<l.size();i++){
+					writer.write(l.get(i)+"\r\n");
+				}
+				writer.close();
+				return true;
+			}catch(IOException ex){
+				ex.printStackTrace();	
+			return false;
+			}
+	}
 	@Override
 	public boolean writeIDFile(String s) {
 		l.clear();
@@ -130,13 +163,72 @@ public class IOServiceImpl implements IOService{
 	@Override
 	public String readFile(String userId, String fileName) {
 		// TODO Auto-generated method stub
-		return "OK";
-	}
+		l.clear();
+		File f = new File("code/"+userId+"_"+fileName+"_code" );
+		try{
+			FileReader fileReader=new FileReader(f);
+			BufferedReader reader=new BufferedReader(fileReader);
+			String str=null;
+			while ((str=reader.readLine())!=null){
+				if(str!=" "){
+				l.add(str);
+				}
+			}
+			reader.close();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return l.get(l.size()-1);	
+		
+		}
+	@Override
+	public String readFileVersion(String userId, String fileName,int v) {
+		// TODO Auto-generated method stub
+		l.clear();
+		File f = new File("code/"+userId+"_"+fileName+"_code" );
+		try{
+			FileReader fileReader=new FileReader(f);
+			BufferedReader reader=new BufferedReader(fileReader);
+			String str=null;
+			while ((str=reader.readLine())!=null){
+				if(str!=" "){
+				l.add(str);
+				}
+			}
+			reader.close();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return l.get(v);	
+		
+		}
+	@Override
+	public int readFileVersionNum(String userId, String fileName) {
+		// TODO Auto-generated method stub
+		l.clear();
+		File f = new File("code/"+userId+"_"+fileName+"_code" );
+		try{
+			FileReader fileReader=new FileReader(f);
+			BufferedReader reader=new BufferedReader(fileReader);
+			String str=null;
+			while ((str=reader.readLine())!=null){
+				if(str!=" "){
+				l.add(str);
+				}
+			}
+			reader.close();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return l.size();	
+		
+		}
+	
 	@Override
 	public boolean createFile(String userId,String fileName) {
 		// TODO Auto-generated method stub
 		 try{
-			 File file=new File(userId+"_"+fileName+"_"+"code"); 
+			 File file=new File("code/"+userId+"_"+fileName+"_"+"code"); 
 			 file.createNewFile();
 			 }catch(IllegalArgumentException e){
 			 }catch(SecurityException e){}
@@ -144,9 +236,37 @@ public class IOServiceImpl implements IOService{
 		return true;
 	}
 	@Override
-	public String readFileList(String userId) {
+	public boolean createlistFile(String userId) {
 		// TODO Auto-generated method stub
-		return "OK";
+		 try{
+			 File file=new File(userId+"_"+"list"); 
+			 file.createNewFile();
+			 }catch(IllegalArgumentException e){
+			 }catch(SecurityException e){}
+			 catch(IOException e){}
+		return true;
+	}
+	@Override
+	public String[] readFileList(String userId) {
+		// TODO Auto-generated method stub
+		l.clear();
+		File f = new File(userId+"_list" );
+		try{
+			FileReader fileReader=new FileReader(f);
+			BufferedReader reader=new BufferedReader(fileReader);
+			String str=null;
+			while ((str=reader.readLine())!=null){
+				if(str!=" "){
+				l.add(str);
+				}
+			}
+			reader.close();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		 String[] s = new String[l.size()];
+	        s = l.toArray(s);
+		return s;
 	}
 	
 }

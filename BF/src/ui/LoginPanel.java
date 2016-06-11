@@ -25,7 +25,7 @@ public class LoginPanel extends JPanel {
 	
 	private Image img;
 	public boolean isLogin;
-	public String userId;
+	public String userId="";
 	protected LoginPanel(Image img){
 		ImageIcon lib=new ImageIcon("image/loginButton.png");
 		ImageIcon rb=new ImageIcon("image/register.png");
@@ -103,6 +103,7 @@ public class LoginPanel extends JPanel {
 				else{
 					try {
 						RemoteHelper.getInstance().getIOService().writeIDFile(s);
+						RemoteHelper.getInstance().getIOService().createlistFile(id);
 						DialogCreator.successDialog0("Success");
 					} catch (RemoteException e1) {
 						e1.printStackTrace();

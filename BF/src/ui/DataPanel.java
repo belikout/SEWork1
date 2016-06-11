@@ -22,6 +22,7 @@ public class DataPanel extends JPanel {
 		    text.setFont(fm);
 		    text.setBounds(0, 0, WIDTH, HEIGHT);
 		    text.setLineWrap(true);
+		    text.getCaret().setBlinkRate(800);
 		    this.add(text);
 		    this.setSize(400, 250);
 		    this.setVisible(true);

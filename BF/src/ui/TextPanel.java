@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.event.CaretEvent;
+import javax.swing.text.Caret;
 
 public class TextPanel extends JPanel {
 	/**
@@ -28,6 +30,8 @@ public class TextPanel extends JPanel {
 		    text.setFont(fm);
 		    text.setBounds(0, 0, WIDTH, HEIGHT);
 		    text.setLineWrap(true);
+		    text.setCaretColor(Color.WHITE);	    
+	        text.getCaret().setBlinkRate(800);
 		    this.add(text);
 		    this.setSize(800, 300);
 		    this.setVisible(true);

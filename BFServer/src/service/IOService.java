@@ -8,7 +8,7 @@ public interface IOService extends Remote{
 	
 	public String readFile(String userId, String fileName)throws RemoteException;
 	
-	public String readFileList(String userId)throws RemoteException;
+	public String[] readFileList(String userId)throws RemoteException;
 
 	public boolean readIDFile(String userId,String userPassword)throws RemoteException;
 
@@ -17,4 +17,12 @@ public interface IOService extends Remote{
 	public boolean readIDFile0(String userId)throws RemoteException;
 
 	public boolean createFile(String userId,String fileName) throws RemoteException;
+
+	public boolean createlistFile(String userId)throws RemoteException;
+
+	public boolean writelistFile(String userId, String fileName)throws RemoteException;
+
+	public String readFileVersion(String userId, String fileName,int v)throws RemoteException;
+
+	public int readFileVersionNum(String userId, String fileName)throws RemoteException;
 }
