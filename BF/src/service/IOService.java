@@ -15,4 +15,7 @@ public interface IOService extends Remote{
 	public boolean writeIDFile(String s)throws RemoteException;
 	
 	public boolean readIDFile0(String userId)throws RemoteException;
+	
+	public boolean createFile(String userId,String fileName)throws RemoteException;
+	
 }

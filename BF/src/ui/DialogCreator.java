@@ -184,22 +184,57 @@ public class DialogCreator {
 		dialog.add(dialogPane);
 		dialog.getRootPane().setDefaultButton(okButton); 
 	}
-	public static  String InputDialog(String name,String message){
-		String input = null;
+	public static void failDialog1(String name){
 		JButton okButton;
-		JTextField inputField;
-		ImageIcon dialogBgIcon = new ImageIcon("image/dialogBg.png");
-		ImageIcon okIcon = new ImageIcon("image/CHN-okButton.png");
+		ImageIcon dialogBgIcon = new ImageIcon("image/dialogBg2.png");
+		ImageIcon okIcon = new ImageIcon("image/ok0.png");
 		dialogPane = new JOptionPane();
 		dialogPane.setLayout(null);
 		JLabel imageLabel = new JLabel(dialogBgIcon);
 		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
-		JLabel wordLabel = new JLabel();
+		/*JLabel wordLabel = new JLabel();
 		wordLabel.setText(message);
 		wordLabel.setForeground(Color.WHITE);
 		wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		wordLabel.setFont(new Font(Font.DIALOG,Font.BOLD,30));
-		wordLabel.setBounds(10,40,400,100);
+		wordLabel.setBounds(10,40,400,100);*/
+		
+		okButton = new JButton();
+		okButton.setIcon(okIcon);
+		okButton.setBounds(170,180,okIcon.getIconWidth(),okIcon.getIconHeight());
+		okButton.setOpaque(true);
+		okButton.setContentAreaFilled(false);
+		okButton.setBorderPainted(false);
+		okButton.setFocusPainted(false);
+		okButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();
+			}
+			
+		});
+		//dialogPane.add(wordLabel);
+		dialogPane.add(okButton);
+		dialogPane.add(imageLabel);
+		//wordLabel-top;okButton-middle;imageLabel-bottom
+		dialogPane.setOpaque(false);
+		
+		dialogPane.setPreferredSize(new Dimension(400,250));
+		dialog = dialogPane.createDialog(okButton,name);
+	    dialog.setVisible(true);
+	    //how to set a dialog as Opaque?
+		dialog.add(dialogPane);
+		dialog.getRootPane().setDefaultButton(okButton); 
+	}
+	public static  String InputDialog(String name){
+		String input = null;
+		JButton okButton;
+		JTextField inputField;
+		ImageIcon dialogBgIcon = new ImageIcon("image/dialogBg3.png");
+		ImageIcon okIcon = new ImageIcon("image/ok.png");
+		dialogPane = new JOptionPane();
+		dialogPane.setLayout(null);
+		JLabel imageLabel = new JLabel(dialogBgIcon);
+		imageLabel.setBounds(0,0,dialogBgIcon.getIconWidth(),dialogBgIcon.getIconHeight());
 		
 		okButton = new JButton();
 		okButton.setIcon(okIcon);
@@ -214,12 +249,12 @@ public class DialogCreator {
 			}
 			
 		});
-		inputField = new JTextField("localhost");
-		inputField.setBounds(80, 120, 250, 30);
+		inputField = new JTextField();
+		inputField.setBounds(80, 100, 250, 40);
 		inputField.setFocusable(true);
 		
 		dialogPane.add(inputField);
-		dialogPane.add(wordLabel);
+		
 		dialogPane.add(okButton);
 		dialogPane.add(imageLabel);
 		dialogPane.setOpaque(false);

@@ -33,6 +33,9 @@ public class MainFrame extends JFrame {
 	private ResultPanel resultPanel;
 	private LoginFrame loginFrame;
 	private TextPanel textPanel;
+	private String userId;
+	private String fileName;
+	private boolean isLogin;
 	public MainFrame() {
 		// 创建窗体
 		JFrame frame = new JFrame("BF Client");
@@ -80,7 +83,7 @@ public class MainFrame extends JFrame {
 		logMenu.add(logoutMenuItem);
 		frame.setJMenuBar(menuBar);
 		
-		newMenuItem.addActionListener(new MenuItemActionListener());
+		newMenuItem.addActionListener(new NewActionListener());
 		openMenuItem.addActionListener(new MenuItemActionListener());
 		saveMenuItem.addActionListener(new SaveActionListener());
 		exitMenuItem.addActionListener(new MenuItemActionListener());
@@ -145,7 +148,7 @@ public class MainFrame extends JFrame {
 				String result=execute(code,param);
 				System.out.println(result);
 				resultPanel.cl.show(ResultPanel.jCards, "afterPanel");
-				resultPanel.afterPanel.text.setText("Hello, result: "+result);
+				resultPanel.afterPanel.text.setText("Hello, result: \r\n"+result);
 			} else if(cmd.equals("Exit")){
 				System.exit(0);
 			}
@@ -158,7 +161,24 @@ public class MainFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String code = textPanel.text.getText();
 			try {
-				RemoteHelper.getInstance().getIOService().writeFile(code, "admin", "code");
+				userId=loginFrame.loginPanel.userId;
+				RemoteHelper.getInstance().getIOService().writeFile(code, userId, fileName);
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+		}
+
+	}
+	class NewActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			textPanel.text.setText("");
+			resultPanel.cl.show(ResultPanel.jCards, "beforePanel");
+			try {
+				userId=loginFrame.loginPanel.userId;
+				fileName=DialogCreator.InputDialog("New File");
+				RemoteHelper.getInstance().getIOService().createFile(userId,fileName);
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}

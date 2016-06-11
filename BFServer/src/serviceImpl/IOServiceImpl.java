@@ -12,17 +12,35 @@ public class IOServiceImpl implements IOService{
 	 ArrayList<String> l=new ArrayList<String>(); 
 	@Override
 	public boolean writeFile(String file, String userId, String fileName) {
-		File f = new File(userId + "_" + fileName);
-		try {
-			FileWriter fw = new FileWriter(f, false);
-			fw.write(file);
-			fw.flush();
-			fw.close();
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
+		l.clear();
+		File f = new File(userId + "_" + fileName+"_"+"code");
+		try{
+			
+			FileReader fileReader=new FileReader(f);
+			BufferedReader reader=new BufferedReader(fileReader);
+			String str=null;
+			while ((str=reader.readLine())!=null){
+				if(str!=" "){
+				l.add(str);
+				}
+			}
+			reader.close();
+		}catch(Exception ex){
+		
+			ex.printStackTrace();
 		}
+		l.add(file);
+		 try{
+				FileWriter writer=new FileWriter(f);
+				for(int i=0;i<l.size();i++){
+					writer.write(l.get(i)+"\r\n");
+				}
+				writer.close();
+				return true;
+			}catch(IOException ex){
+				ex.printStackTrace();	
+			return false;
+			}
 	}
 
 	@Override
@@ -113,6 +131,17 @@ public class IOServiceImpl implements IOService{
 	public String readFile(String userId, String fileName) {
 		// TODO Auto-generated method stub
 		return "OK";
+	}
+	@Override
+	public boolean createFile(String userId,String fileName) {
+		// TODO Auto-generated method stub
+		 try{
+			 File file=new File(userId+"_"+fileName+"_"+"code"); 
+			 file.createNewFile();
+			 }catch(IllegalArgumentException e){
+			 }catch(SecurityException e){}
+			 catch(IOException e){}
+		return true;
 	}
 	@Override
 	public String readFileList(String userId) {

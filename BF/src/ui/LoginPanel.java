@@ -24,7 +24,8 @@ public class LoginPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Image img;
-	
+	public boolean isLogin;
+	public String userId;
 	protected LoginPanel(Image img){
 		ImageIcon lib=new ImageIcon("image/loginButton.png");
 		ImageIcon rb=new ImageIcon("image/register.png");
@@ -70,8 +71,11 @@ public class LoginPanel extends JPanel {
 				}catch(RemoteException e1){
 					e1.printStackTrace();
 				}
-				if(k)
+				if(k){
 				DialogCreator.successDialog("Success");
+				userId=id;
+				isLogin=true;
+				}
 				else
 				DialogCreator.failDialog("Fail");
 			}
