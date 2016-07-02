@@ -1,7 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
-
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
@@ -16,6 +16,12 @@ public class BeforePanel extends JPanel {
 			imageIcon = new ImageIcon("image/resultbg.png");
 			this.setOpaque(false);
 		    this.setLayout(new BorderLayout());
+		    text = new JLabel();
+		    Font fm=new Font("Comic Sans MS",Font.PLAIN,24);
+		    text.setOpaque(false);
+		    text.setFont(fm);
+		    text.setBounds(0, 0, WIDTH, HEIGHT);
+		    this.add(text);
 		    this.setSize(400, 250);
 		    this.setVisible(true);
 	}

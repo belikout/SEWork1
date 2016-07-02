@@ -18,14 +18,16 @@ public class ResultPanel extends JPanel {
 	public static JPanel jCards=new JPanel();
 	public static CardLayout cl=new CardLayout();
 	public AfterPanel afterPanel;
+	public BeforePanel beforePanel;
 	private ImageIcon imageIcon = null;
 	public ResultPanel(){
 			afterPanel=new AfterPanel();
+			beforePanel=new BeforePanel();
 			imageIcon = new ImageIcon("image/resultbg.png");
 			this.setOpaque(false);
 		    this.setLayout(new BorderLayout());
 		    jCards.setLayout(cl);
-			jCards.add(new BeforePanel(), "beforePanel");
+			jCards.add(beforePanel, "beforePanel");
 			jCards.add(afterPanel, "afterPanel");
 		    cl.show(jCards, "beforePanel");
 		    text = new JLabel();

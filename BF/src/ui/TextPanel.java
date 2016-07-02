@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.text.Caret;
@@ -32,8 +34,12 @@ public class TextPanel extends JPanel {
 		    text.setLineWrap(true);
 		    text.setCaretColor(Color.WHITE);	    
 	        text.getCaret().setBlinkRate(800);
-		    this.add(text);
+	        JScrollPane js=new JScrollPane(text);
+	        js.setOpaque(false);
+	        js.getViewport().setOpaque(false);
+	        this.add(js);
 		    this.setSize(800, 300);
+		   
 		    this.setVisible(true);
 	}
 	@Override

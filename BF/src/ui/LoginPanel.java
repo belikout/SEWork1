@@ -34,7 +34,7 @@ public class LoginPanel extends JPanel {
 		this.img = img;
 		Font f=new Font("Comic Sans MS",Font.PLAIN,20);
 		
-		Font fm=new Font("Comic Sans MS",Font.PLAIN,10);
+		Font fm=new Font("Comic Sans MS",Font.PLAIN,15);
 		JTextField IdField = new JTextField();
 		JPasswordField KeyField = new JPasswordField();
 		IdField.setFont(fm);
@@ -61,6 +61,7 @@ public class LoginPanel extends JPanel {
 		loginButton.setOpaque(true);
 		loginButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				if(userId==""){
 				String id=IdField.getText();
 				String key=new String(KeyField.getPassword());
 				IdField.setText("");
@@ -78,6 +79,10 @@ public class LoginPanel extends JPanel {
 				}
 				else
 				DialogCreator.failDialog("Fail");
+			}
+				
+			else
+				DialogCreator.failDialog("Fail");	
 			}
 	});
 		this.add(loginButton);

@@ -17,9 +17,9 @@ public class ExecuteServiceImpl implements ExecuteService {
 		int i=0;
 		int d=0;
 		int sgn=0;
-		String res=null;
+		String res="";
 		int[] s=new int[500];
-		
+		try{
 		for(int j=0;j<code.length();j++){
 			switch(code.charAt(j)){
 			case'>':i++;
@@ -47,11 +47,16 @@ public class ExecuteServiceImpl implements ExecuteService {
 			}else{
 				sgn--;
 			}
+			default:break;
 	}
 	}
+		}catch(Exception e){
+			e.printStackTrace();
+			return "Program Error";
+		}
 	
 	
-		return res.substring(4, res.length());
+		return res;
 	}
 	
 }
